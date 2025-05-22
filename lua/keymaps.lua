@@ -1,3 +1,6 @@
+local uname = vim.loop.os_uname()
+local is_mac = uname.sysname == "Darwin"
+local is_linux = uname.sysname == "Linux"
 
 -- File Tree: <leader>e to toggle
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File Tree" })
@@ -60,10 +63,17 @@ vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Next Buffer" 
 vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
 
 -- Resize splits using Ctrl + Arrow Keys
-vim.keymap.set("n", "<M-Up>", "<cmd>resize -2<CR>", { desc = "Resize Split Up" })
-vim.keymap.set("n", "<M-Down>", "<cmd>resize +2<CR>", { desc = "Resize Split Down" })
-vim.keymap.set("n", "<M-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize Split Left" })
-vim.keymap.set("n", "<M-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize Split Right" })
+if is_mac then
+  vim.keymap.set("n", "<M-Up>", "<cmd>resize -2<CR>", { desc = "Resize Split Up" })
+  vim.keymap.set("n", "<M-Down>", "<cmd>resize +2<CR>", { desc = "Resize Split Down" })
+  vim.keymap.set("n", "<M-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize Split Left" })
+  vim.keymap.set("n", "<M-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize Split Right" })
+elseif is_linux then
+  vim.keymap.set("n", "<C-Up>", "<cmd>resize -2<CR>", { desc = "Resize Split Up" })
+  vim.keymap.set("n", "<C-Down>", "<cmd>resize +2<CR>", { desc = "Resize Split Down" })
+  vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize Split Left" })
+  vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize Split Right" })
+end
 
 vim.keymap.set("n", "<leader>x", "<cmd>Bdelete<CR>", { desc = "Close Buffer" })
 
