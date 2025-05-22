@@ -12,6 +12,9 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.api.nvim_set_keymap('n', 'Q', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
+vim.api.nvim_set_keymap('n', '<leader><leader>', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
+vim.keymap.set('n', '<leader>tc', '<cmd>Telescope colorscheme<CR>', { desc = "Pick colorscheme" })
 
 vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open Lazygit" })
 
@@ -30,7 +33,8 @@ vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" 
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
 
 -- Find References
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find References" })
+-- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find References" })
+vim.keymap.set('n', 'gr', '<cmd>Lspsaga finder<CR>', { noremap = true, silent = true })
 
 -- Hover Docs
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Documentation" })

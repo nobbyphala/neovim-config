@@ -21,6 +21,16 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
 -- vim.o.background = "light"
 vim.cmd("colorscheme catppuccin-mocha")
 
+-- autosave
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+  pattern = "*",
+  callback = function()
+    if vim.bo.modified and vim.fn.expand('%') ~= '' and vim.bo.buftype == '' then
+      vim.cmd('silent write')
+    end
+  end
+})
+
 -- init plugins config
 require("config.nvim-tree")
 require("config.lualine")
