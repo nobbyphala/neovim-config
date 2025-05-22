@@ -6,8 +6,21 @@ require("mason-lspconfig").setup({
 
 require("lspconfig").ts_ls.setup({})
 require("lspconfig").gopls.setup({})
-
 require("go").setup()
+require("lspconfig").yamlls.setup({
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        ["https://json.schemastore.org/kubernetes.json"] = "/*.k8s.yaml",
+        ["https://json.schemastore.org/docker-compose.json"] = "docker-compose*.yaml",
+      },
+      validate = true,
+      hover = true,
+      completion = true,
+    }
+  }
+})
 
 local cmp = require('cmp')
 cmp.setup({
@@ -47,7 +60,7 @@ cmp.setup({
 })
 
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "typescript", "javascript", "lua", "json", "html", "css", "go" },
+  ensure_installed = { "typescript", "javascript", "lua", "json", "html", "css", "go", "yaml" },
   highlight = { enable = true },
   indent = { enable = true },
 })

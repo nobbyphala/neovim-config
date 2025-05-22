@@ -12,9 +12,24 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  pattern = "*",
+  command = "checktime"
+})
 
-vim.o.background = "light"
-vim.cmd("colorscheme gruvbox")
+-- vim.o.background = "light"
+vim.cmd("colorscheme catppuccin-mocha")
+
+-- autosave
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+  pattern = "*",
+  callback = function()
+    if vim.bo.modified and vim.fn.expand('%') ~= '' and vim.bo.buftype == '' then
+      vim.cmd('silent write')
+    end
+  end
+})
 
 -- init plugins config
 require("config.nvim-tree")
